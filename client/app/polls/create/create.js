@@ -5,7 +5,17 @@ angular.module('pollioApp')
     $stateProvider
       .state('polls.create', {
         url: '/create',
-        templateUrl: 'app/polls/create/create.html',
+        template: '<div ui-view=""></div>',
+        abstract: true
+      })
+      .state('polls.create.add-questions', {
+        url: '/questions',
+        templateUrl: 'app/polls/create/add-questions.html',
         controller: 'CreateCtrl'
+      })
+      .state('polls.create.add-recipients', {
+        url: '/recipients',
+        templateUrl: 'app/polls/create/add-recipients.html',
+        controller: 'AddRecipientsCtrl'
       });
   });

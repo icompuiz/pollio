@@ -2,7 +2,11 @@
 
 angular.module('pollioApp')
     .factory('pollRecipient', function() {
-        function PollRecipient() {}
+        
+        function PollRecipient() {
+        	this.type = 'email';
+        	this.value = '';
+        }
 
         return {
             create: function() {

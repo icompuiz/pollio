@@ -1,8 +1,13 @@
 'use strict';
 
 angular.module('pollioApp')
-  .controller('CreateCtrl', function ($scope, poll) {
-    $scope.formData = poll.create();
+  .controller('CreateCtrl', function ($scope, $state, poll, pollModel) {
+    
+    if (!pollModel.current) {
+    	pollModel.current = poll.create();
+    }
+
+    $scope.formData = pollModel.current;
 
     $scope.$watch('formData.questions', function(questions) {
 
@@ -11,4 +16,10 @@ angular.module('pollioApp')
     	}
 
     }, true);
+
+    $scope.submit = function() {
+    	$state.go('polls.create.add-recipients');
+    };
+
+
   });
