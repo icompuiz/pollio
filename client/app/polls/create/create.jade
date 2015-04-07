@@ -1,0 +1,52 @@
+form.form.create-form(ng-submit="submit()")
+	.form-actions.bg-primary
+		.container-fluid
+			.row
+				.col-xs-12
+					.btn-toolbar
+						.btn-group.pull-right
+							button.btn.btn-sm.btn-submit.btn-default(type="submit", value="Create Poll") Create Poll
+	.form-group
+		label Title
+		input.form-control(type="text", data-ng-model="formData.name", required="true")
+	.well
+		.row
+			.col-xs-12
+				.panel.panel-default(data-ng-repeat="question in formData.questions")
+					.panel-heading
+						label Question # {{$index + 1}}
+						a.close(data-ng-click="formData.removeQuestion($index)") &times;
+					.panel-body
+						.form-group
+							input.form-control(type="text" data-ng-model="question.name", placeholder="What is your question?")
+						.form-group
+							label What kind of question is this?
+							.radio
+								label
+									input(type="radio", name="question[{{$index}}][type]", value="multi", checked, data-ng-model="question.type")
+									| Multiple Choice
+							.radio
+								label
+									input(type="radio", name="question[{{$index}}][type]", value="boolean", data-ng-model="question.type")
+									| True / False
+							.radio
+								label
+									input(type="radio", name="question[{{$index}}][type]", value="text", data-ng-model="question.type")
+									| Text
+						.row
+							.col-xs-12
+								.well(ng-if="question.type === 'multi'")
+									.form-group(data-ng-repeat="answer in question.answers")
+										.input-group
+											input.input-sm.form-control(type="text", data-ng-model="answer.body", placeholder="Answer # {{$index + 1}}", required="true")
+											.input-group-btn
+												a.btn.btn-sm.btn-default(data-ng-click="question.removeAnswer($index)")
+													span.glyphicon.glyphicon-remove
+									.btn-group.btn-group-justified
+										a.btn.btn-sm.btn-default(data-ng-click="question.addAnswer()")
+											span.glyphicon.glyphicon-plus
+											|  Add Answer
+		.btn-group.btn-group-justified
+			a.btn.btn-sm.btn-default(data-ng-click="formData.addQuestion()")
+				span.glyphicon.glyphicon-plus
+				|  Add Question
