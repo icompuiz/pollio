@@ -1,0 +1,38 @@
+h2 {{ currentPoll.name }}
+form.form.create-form(ng-submit="submit()")
+	.form-actions.bg-primary
+		.container-fluid
+			.row
+				.col-xs-12
+					.btn-toolbar
+						.btn-group.pull-right
+							button.btn.btn-sm.btn-submit.btn-default(type="submit", value="Create Poll") Submit Responses
+	.well
+		.row
+			.col-xs-12
+				.panel.panel-default(data-ng-repeat="question in currentPoll.questions")
+					.panel-body
+						label {{ question.name }}
+						.row
+							.col-xs-12
+								.form-group(ng-if="question.type === 'multi'")
+									.radio(data-ng-repeat="answer in question.answers")
+										label
+											input(type="radio", name="answer_{{ question._id }}", ng-value="answer", ng-model="responses[question._id].answer")
+											| {{ answer.body }}
+
+								.form-group(ng-if="question.type === 'string'")
+									input.form-control(type="text", name="answer_{{ question._id }}", placeholder="Enter your response", ng-required="question.required", ng-model="responses[question._id].answer")
+
+								.form-group(ng-if="question.type === 'text'")
+									textarea.form-control(ng-required="question.required", ng-model="responses[question._id].answer")
+
+								.form-group(ng-if="question.type === 'boolean'")
+									.radio
+										label
+											input(type="radio", name="answer_{{ question._id }}", ng-value="true", ng-required="question.required", ng-model="responses[question._id].answer")
+											| True
+									.radio
+										label
+											input(type="radio", name="answer_{{ question._id }}", ng-value="false", ng-required="question.required", ng-model="responses[question._id].answer")
+											| False

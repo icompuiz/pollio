@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('pollioApp')
-  .controller('PollsCtrl', ['$scope', function ($scope) {
-  	$scope.name ='';
+    .controller('PollsCtrl', ['$scope','pollModel', function($scope, pollModel) {
+        
+        $scope.polls = pollModel.findAll();
+
     }]);

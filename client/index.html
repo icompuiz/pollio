@@ -9,7 +9,8 @@
     <base href="/">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <!-- <meta name="viewport" content="width=device-width"> -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
@@ -46,6 +47,7 @@
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/restangular/dist/restangular.js"></script>
+      <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
       <!-- endbower -->
       <!-- <script src="socket.io-client/socket.io.js"></script> -->
     <!-- endbuild -->
@@ -55,8 +57,8 @@
           <!-- injector:js -->
           <script src="app/pollio/pollio.controller.js"></script>
           <script src="app/pollio/pollio.js"></script>
+          <script src="app/polls/create/add-questions.controller.js"></script>
           <script src="app/polls/create/add-recipients.controller.js"></script>
-          <script src="app/polls/create/create.controller.js"></script>
           <script src="app/polls/create/create.js"></script>
           <script src="app/polls/factories/poll-question-answer-respose/poll-question-answer-respose.factory.js"></script>
           <script src="app/polls/factories/poll-question-answer/poll-question-answer.factory.js"></script>
@@ -65,7 +67,10 @@
           <script src="app/polls/factories/poll/poll.factory.js"></script>
           <script src="app/polls/polls.controller.js"></script>
           <script src="app/polls/polls.js"></script>
+          <script src="app/polls/response/response.controller.js"></script>
+          <script src="app/polls/response/response.js"></script>
           <script src="app/polls/services/poll.model/poll.model.service.js"></script>
+          <script src="app/uniqueid/uniqueid.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->

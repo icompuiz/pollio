@@ -7,11 +7,10 @@ angular.module('pollioApp')
                 parent: 'pollio',
                 url: 'polls',
                 template: '<div ui-view=""></div>',
-                controller: 'PollsCtrl'
             })
-            .state('polls.index', {
+            .state('polls.list', {
                 url: '/',
-                templateUrl: 'app/polls/list.html',
-                controller: 'ListPollsCtrl'
+                templateUrl: 'app/polls/polls.html',
+                controller: 'PollsCtrl'
             });
     }]);

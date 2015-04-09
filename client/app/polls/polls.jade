@@ -1,1 +1,17 @@
-div(data-ui-view="")
+.row
+	.col-md-5.col-md-offset-7
+		.input-group
+			input.input-sm.form-control(type="text", data-ng-model="search", placeholder="Search")
+			.input-group-btn
+				a.btn.btn-sm.btn-default(data-ng-click="doSearch()")
+					span.glyphicon.glyphicon-search
+hr
+.row
+	.col-xs-4.col-sm-2.col-md-2(ng-repeat="(key, poll) in polls")
+		.thumbnail
+			.text-center.text-nowrap(style="overflow: hidden")
+				a(ui-sref="polls.edit.add-questions({ id: key })")
+						{{ poll.name }}
+			.text-center
+				h4 {{ poll.responses.length || 0 }}
+				a(ui-sref="polls.response.add({ pollid: key })") responses

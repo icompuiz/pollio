@@ -4,19 +4,26 @@ form.form.create-form(ng-submit="submit()")
 			.row
 				.col-xs-12
 					.btn-toolbar
+						.btn-group.pull-left
+							a.btn.btn-sm.btn-submit.btn-default(type="submit", value="Questions", data-ng-click="goBack()") 
+								span.glyphicon.glyphicon-chevron-left
+								|  Questions
 						.btn-group.pull-right
-							button.btn.btn-sm.btn-submit.btn-default(type="submit", value="Create Poll") Continue
+							a.btn.btn-sm.btn-submit.btn-primary(data-ng-click="sendPoll()")
+								| Send
+							button.btn.btn-sm.btn-submit.btn-default(type="submit", value="Save Poll")
+								| Save Poll
 
 	.well
 		.row
 			.col-xs-12
-				.form-group(data-ng-repeat="recipient in formData.recipients")
-					label {{ recipient.type }}
-					div(ng-class="{ 'input-group': 'Public Link' !== recipient.type }")
-						input.input-sm.form-control(type="text", data-ng-model="recipient.value", placeholder="Enter Email Address", required="true", ng-disabled="'Public Link' === recipient.type")
-						.input-group-btn(ng-hide="'Public Link' === recipient.type")
-							a.btn.btn-sm.btn-default(data-ng-click="formData.removeRecipient($index)")
-								span.glyphicon.glyphicon-remove
+				.panel.panel-default(data-ng-repeat="recipient in formData.recipients")
+					.panel-heading
+						label {{ recipient.type }}
+						a.close(data-ng-click="formData.removeRecipient($index)", ng-hide="'Public Link' === recipient.type") &times;
+					.panel-body
+						.form-group
+							input.input-sm.form-control(type="text", data-ng-model="recipient.value", placeholder="Enter Email Address", required="true", ng-disabled="'Public Link' === recipient.type")
 		.btn-group.btn-group-justified
 			a.btn.btn-sm.btn-default(data-ng-click="formData.addRecipient()")
 				span.glyphicon.glyphicon-plus

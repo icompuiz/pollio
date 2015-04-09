@@ -1,45 +1,59 @@
 'use strict';
 
 angular.module('pollioApp')
-  .factory('poll', function (pollQuestion, pollRecipient) {
+    .factory('poll', function(pollQuestion, pollRecipient, uniqueid) {
 
-    function Poll() {
+        function Poll() {
 
-    	this.slug = 'r9er9d';
-    	this.questions = [];
-    	this.recipients = [];
+            this._id = this._id || uniqueid.create();
+            this.slug = this._id;
 
-    	this.addQuestion = function() {
-    		this.questions.push(pollQuestion.create());
-    	};
+            if (this.questions) {
+            	this.questions = this.questions.map(pollQuestion.create);
+            } else {
+            	this.questions = [];
+            }
 
-    	this.removeQuestion = function($index) {
-    		this.questions.splice($index, 1);
-    	};
-    	this.addRecipient = function() {
-    		this.recipients.push(pollRecipient.create());
-    	};
+            if (this.recipients) {
+            	this.recipients = this.recipients.map(pollRecipient.create);
+            } else {
+            	this.recipients = [];
+            }
 
-    	this.removeRecipient = function($index) {
-    		this.recipients.splice($index, 1);
-    	};
+            this.addQuestion = function() {
+                this.questions.push(pollQuestion.create());
+            };
 
-    	this.addWeblink = function() {
+            this.removeQuestion = function($index) {
+                this.questions.splice($index, 1);
+            };
+            this.addRecipient = function() {
+                this.recipients.push(pollRecipient.create());
+            };
 
-    		var recipient = pollRecipient.create();
-    		recipient.type = 'Public Link';
-    		recipient.value = ['http://polli.com', this.slug].join('/');
+            this.removeRecipient = function($index) {
+                this.recipients.splice($index, 1);
+            };
 
-    		this.recipients.push(recipient);
+            this.addWeblink = function() {
 
-    	};
+                var recipient = pollRecipient.create();
+                recipient.type = 'Public Link';
+                recipient.value = ['http://polli.com', this.slug].join('/');
 
-    }
+                this.recipients.push(recipient);
 
-    return {
-      create: function() {
-        return new Poll();
-      }
-    };
+            };
+        }
 
-  });
+        return {
+            create: function(source) {
+                if (source) {
+                    Poll.call(source);
+                    return source;
+                }
+                return new Poll();
+            }
+        };
+
+    });

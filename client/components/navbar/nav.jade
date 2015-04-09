@@ -1,14 +1,18 @@
 nav.navbar.navbar-inverse.navbar-fixed-top(ng-controller="NavbarCtrl")
-  .container
-    .navbar-header
-      button.navbar-toggle.collapsed(type='button', ng-click="isCollapsed = !isCollapsed")
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand.brand-label(ui-sref="polls.create.add-questions") polli
-    .collapse.navbar-collapse(collapse="isCollapsed")
-      ul.nav.navbar-nav
-        li
-          a
-            | Your Polls
+	.container
+		.navbar-header
+			button.navbar-toggle.collapsed(type='button', ng-click="isCollapsed = !isCollapsed")
+				span.sr-only Toggle navigation
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+			a.navbar-brand.brand-label(ui-sref="polls.list") polli
+		.collapse.navbar-collapse(collapse="isCollapsed")
+			ul.nav.navbar-nav
+				li
+					a(ui-sref="polls.create.add-questions")
+						| Create a Poll
+			ul.nav.navbar-nav.navbar-right
+				li
+					a
+						| About Polli

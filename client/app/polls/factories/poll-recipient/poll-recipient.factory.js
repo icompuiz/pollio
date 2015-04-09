@@ -1,16 +1,22 @@
 'use strict';
 
 angular.module('pollioApp')
-    .factory('pollRecipient', function() {
-        
+    .factory('pollRecipient', function(uniqueid) {
+
         function PollRecipient() {
-        	this.type = 'email';
-        	this.value = '';
+            this._id = this._id || uniqueid.create();
+            this.type = this.type || 'email';
+            this.value = this.value || '';
         }
 
         return {
-            create: function() {
-                return new PollRecipient();
+            create: function(source) {
+            	if (source) {
+                PollRecipient.call(source);
+                return source;
+            	}
+              return new PollRecipient();
+
             }
         };
     });

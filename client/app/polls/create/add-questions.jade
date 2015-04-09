@@ -19,6 +19,11 @@ form.form.create-form(ng-submit="submit()")
 						.form-group
 							input.form-control(type="text" data-ng-model="question.name", placeholder="What is your question?", required="true")
 						.form-group
+							.checkbox
+								label
+									input(type="checkbox", name="question[{{$index}}][type]", checked, data-ng-model="question.required")
+									| Required?
+						.form-group
 							label What kind of question is this?
 							.radio
 								label
@@ -28,6 +33,10 @@ form.form.create-form(ng-submit="submit()")
 								label
 									input(type="radio", name="question[{{$index}}][type]", value="boolean", data-ng-model="question.type")
 									| True / False
+							.radio
+								label
+									input(type="radio", name="question[{{$index}}][type]", value="string", data-ng-model="question.type")
+									| Short Answer
 							.radio
 								label
 									input(type="radio", name="question[{{$index}}][type]", value="text", data-ng-model="question.type")
